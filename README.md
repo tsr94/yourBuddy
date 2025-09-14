@@ -1,7 +1,6 @@
-# FoodFrenzy
-FoodFrenzy is a comprehensive system designed for managing customers, inventory, and orders. It offers secure authentication, role-based access control, and database integration using MySQL. Built with Spring Boot and Thymeleaf, the application provides a seamless experience for admin and staff members.
-
-![Screenshot 2024-10-02 123332](https://github.com/user-attachments/assets/1382d32f-3cbb-40c3-b6b5-9fc55cd5176f)
+# YourBuddy
+YourBuddy is a comprehensive system designed for managing customers, inventory, and orders. It offers secure authentication, role-based access control, and database integration using MySQL. Built with Spring Boot and Thymeleaf, the application provides a seamless experience for admin and staff members.
+<img width="1915" height="971" alt="Screenshot 2025-09-14 165416" src="https://github.com/user-attachments/assets/dcaab8da-d173-4622-bde7-de3265d141ed" />
 
 
 ## Features
@@ -31,11 +30,7 @@ Before running this project, ensure you have the following installed:
 - Eclipse or Spring Tool Suite (STS)
 
 ## Setup and Installation
-# 🎁 Donate
 
-<a href="https://buymeacoffee.com/1122anuragg">
-  <img src="https://user-images.githubusercontent.com/25067102/154570688-9e143f2b-fee3-4b05-a9d2-a7a3013b2b51.png" />
-<a/>
 1. Clone the repository:
     ```bash
     git clone https://github.com/your-repository-url/FoodFrenzy.git
@@ -46,14 +41,16 @@ Before running this project, ensure you have the following installed:
     cd FoodFrenzy
     ```
 
-3. Configure MySQL Database:
-    - Create a new MySQL database.
-    - Update `application.properties` with your MySQL credentials:
+3. Configure Postgres Database:
+    - Create a new Postgres database.
+    - Update `application.properties` with your Postgres credentials:
       ```properties
-      spring.datasource.url=jdbc:mysql://localhost:3306/foodfrenzy
-      spring.datasource.username=root
-      spring.datasource.password=root
+      spring.datasource.url=jdbc:postgresql://localhost:5432/FoodFrenzy
+      spring.datasource.username=username
+      spring.datasource.password=password
+      spring.datasource.driver-class-name=org.postgresql.Driver
       spring.jpa.hibernate.ddl-auto=update
+      server.port=8080
       ```
 
 4. Run the project:
@@ -67,11 +64,7 @@ Before running this project, ensure you have the following installed:
 
 Here is a preview of the FoodFrenzy interface:
 
-![Screenshot 2025-05-19 143351](https://github.com/user-attachments/assets/3e34f54c-c986-42ac-96a4-ed7ad18035a6)
-![Screenshot 2025-05-19 143427](https://github.com/user-attachments/assets/a4046d4e-8c3d-4629-8913-5543d709e80e)
-![Screenshot 2025-05-19 143441](https://github.com/user-attachments/assets/09c92348-ec06-4607-9ae4-88b28cc1e0ec)
-![Screenshot 2025-05-19 143452](https://github.com/user-attachments/assets/0e73aece-a28c-413d-9363-245358a0e439)
-![Screenshot 2025-05-19 143504](https://github.com/user-attachments/assets/ac26bd92-0fcd-473d-a175-9bc45fdb12ba)
+
 
 
 ![image](https://github.com/user-attachments/assets/3d407958-efbe-449f-b4e1-5b08b9f8a28b)

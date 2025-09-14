@@ -17,7 +17,7 @@ YourBuddy is a comprehensive system designed for managing customers, inventory, 
 
 - **Backend**: Spring Boot, Java 8, Spring MVC, Spring Data JPA (Hibernate)
 - **Frontend**: Thymeleaf, HTML, CSS, JavaScript
-- **Database**: MySQL
+- **Database**: Postgres
 - **IDE**: Eclipse, Spring Tool Suite (STS)
 
 ## Prerequisites

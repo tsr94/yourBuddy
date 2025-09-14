@@ -16,9 +16,12 @@ public class HomeController
 	@Autowired
 	private ProductServices productServices;
 	@GetMapping(value = {"/home", "/"})
-	public String home()
+	public String home(Model model)
 	{
-		return "Home";
+		 List<Product> allProducts = this.productServices.getAllProducts();
+		 System.out.println("Products from DB: " + allProducts);   
+		 model.addAttribute("products", allProducts);
+		    return "Home";
 	}
 
 	@GetMapping("/products")

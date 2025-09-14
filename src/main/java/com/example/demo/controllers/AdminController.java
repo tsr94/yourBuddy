@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,25 +52,51 @@ public class AdminController {
 	}
 
 	@PostMapping("/userLogin")
-	public String userLogin( @ModelAttribute("userLogin") UserLogin login,Model model)
-	{
+	public String userLogin(@ModelAttribute("userLogin") UserLogin login,
+							Model model,
+							HttpSession session) {
 
-		email=login.getUserEmail();
-		String password=login.getUserPassword();
-		if(services.validateLoginCredentials(email, password))
-		{
-			user = this.services.getUserByEmail(email);
+		email = login.getUserEmail();
+		String password = login.getUserPassword();
+
+		if (services.validateLoginCredentials(email, password)) {
+			User user = this.services.getUserByEmail(email);
+
+			// ✅ store user in session
+			session.setAttribute("user", user);
+
 			List<Orders> orders = this.orderServices.getOrdersForUser(user);
 			model.addAttribute("orders", orders);
 			model.addAttribute("name", user.getUname());
+
 			return "BuyProduct";
-		}
-		else
-		{
+		} else {
 			model.addAttribute("error2", "Invalid email or password");
 			return "Login";
 		}
+	}
+	
+	// Show the admin registration form
+	@GetMapping("/adminRegister")
+	public String showAdminRegisterForm(Model model) {
+	    model.addAttribute("admin", new Admin());
+	    return "Register_Admin";
+	}
 
+	// Handle admin registration form submission
+	@PostMapping("/adminRegister")
+	public String handleAdminRegister(@ModelAttribute("admin") Admin admin, Model model) {
+	    // Check if admin with same email already exists
+	    Admin existingAdmin = adminServices.getAdminByEmail(admin.getAdminEmail());
+	    if (existingAdmin != null) {
+	        model.addAttribute("error", "An admin with this email already exists.");
+	        return "Register_Admin";
+	    }
+
+	    adminServices.addAdmin(admin);
+	    model.addAttribute("success", "Admin registered successfully.");
+	    model.addAttribute("admin", new Admin()); // reset form
+	    return "Register_Admin";
 	}
 	@PostMapping("/product/search")
 	public String seachHandler(@RequestParam("productName") String name,Model model)
@@ -90,6 +117,27 @@ public class AdminController {
 		return "BuyProduct";
 
 	} 
+	
+	@GetMapping("/register")
+	public String showUserRegisterForm(Model model) {
+	    model.addAttribute("user", new User());
+	    return "Register_User"; // Your Thymeleaf page
+	}
+
+	@PostMapping("/register")
+	public String handleUserRegister(@ModelAttribute("user") User user, Model model) {
+	    User existing = services.getUserByEmail(user.getUemail());
+	    if (existing != null) {
+	        model.addAttribute("error", "User already exists with this email.");
+	        return "Register_User";
+	    }
+
+	    services.addUser(user);
+	    model.addAttribute("success", "User registered successfully.");
+	    model.addAttribute("user", new User()); // Clear form
+	    return "Register_User";
+	}
+
 	@GetMapping("/admin/services")
 	public String returnBack(Model model)
 	{

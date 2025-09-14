@@ -15,7 +15,7 @@ public class Product
 	private String pname;
 	private double pprice;
 	private String pdescription;
-
+	private String image;
 	public int getPid() {
 		return pid;
 	}
@@ -40,6 +40,15 @@ public class Product
 	public void setPdescription(String pdescription) {
 		this.pdescription = pdescription;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [pid=" + pid + ", pname=" + pname + ", pprice=" + pprice + ", pdescription=" + pdescription

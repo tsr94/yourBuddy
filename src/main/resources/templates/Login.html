@@ -2,50 +2,82 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>FoodFrenzy</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FoodFrenzy - Login</title>
 	<link rel="icon" type="image/x-icon" href="./img/b.png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<link rel="stylesheet" href="" th:href="@{/css/Navigation.css}" />
-	<link rel="stylesheet" href="" th:href="@{/css/Login.css}" />
+	<link rel="stylesheet" th:href="@{/css/Login.css}" />
 </head>
 
 <body>
-	<nav th:replace="~{Navigation::navbar()}">
-	</nav>
-	<div class="LoginContainer">
-		<div class="admin">
-			<div class="content">
-				<strong style="font-size: 16px;margin-bottom: 0px;">BUSINESS</strong>
-				<h2>For <span style="color:green;">Admins</span></h2>
+<nav th:replace="~{Navigation::navbar()}"></nav>
 
-				<form th:action="@{/adminLogin}" method="post">
-					<b>Email :</b>
-					<input type="email" name="email" placeholder="Enter email..." class="email"> <br />
-					<b>Password:</b>
-					<input type="password" name="password" placeholder="Enter password" class="password">
-					<small style="color: red;" th:text="${error}"></small><br />
-					<button type="submit" class="loginButton">Log in</button>
-				</form>
+<div class="LoginContainer">
+	<div class="admin">
+		<div class="content">
+			<div class="admin-header">
+				<strong>BUSINESS</strong>
+				<h2>For <span>Admins</span></h2>
 			</div>
-		</div>
-		<div class="user">
-			<div class="content">
-				<h2> For <span style="color:green;">Users</span></h2>
-				<form th:action="@{/userLogin}" method="post" class="form">
-					<b>Email :</b>
-					<input type="email" name="userEmail" placeholder="Enter email"><br />
 
-					<b>Password:</b>
-					<input type="password" name="userPassword" placeholder="Enter password" required maxlength="8" minlength="4" class="userPassword"><br />
+			<form th:action="@{/adminLogin}" method="post">
+				<div class="form-group">
+					<label for="admin-email">Email</label>
+					<div class="input-icon">
+						<i class="fas fa-envelope"></i>
+						<input type="email" id="admin-email" name="email" placeholder="Enter your email" required>
+					</div>
+				</div>
 
-					<small style="color: red;" th:text="${error2}"></small><br />
-					<button type="submit" class="loginButton">Log in</button><br>
+				<div class="form-group">
+					<label for="admin-password">Password</label>
+					<div class="input-icon">
+						<i class="fas fa-lock"></i>
+						<input type="password" id="admin-password" name="password" placeholder="Enter your password" required>
+					</div>
+				</div>
 
-					<p>I don't have an account? <a href="register.html" style="color: green;">Register Here</a></p>
-				</form>
-			</div>
+				<small class="error-message" th:text="${error}"></small>
+
+				<button type="submit" class="loginButton">Log in</button>
+			</form>
 		</div>
 	</div>
-</body>
 
+	<div class="user">
+		<div class="content">
+			<div class="user-header">
+				<h2>For <span>Users</span></h2>
+			</div>
+
+			<form th:action="@{/userLogin}" method="post" class="form">
+				<div class="form-group">
+					<label for="user-email">Email</label>
+					<div class="input-icon">
+						<i class="fas fa-envelope"></i>
+						<input type="email" id="user-email" name="userEmail" placeholder="Enter your email" required>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="user-password">Password</label>
+					<div class="input-icon">
+						<i class="fas fa-lock"></i>
+						<input type="password" id="user-password" name="userPassword" placeholder="Enter your password" required maxlength="8" minlength="4">
+					</div>
+				</div>
+
+				<small class="error-message" th:text="${error2}"></small>
+
+				<button type="submit" class="loginButton">Log in</button>
+
+				<div class="register-link">
+					<p>Don't have an account? <a href="register.html">Register Here</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
 </html>

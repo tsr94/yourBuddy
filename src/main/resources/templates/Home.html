@@ -1,30 +1,142 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YourBuddy</title>
 
-<head>
-	<meta charset="UTF-8" />
-	<title>FoodFrenzy</title>
-	<link rel="icon" type="image/x-icon" href="./Images/logo.png">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	<link rel="stylesheet" href="" th:href="@{/css/Navigation.css}" />
-	<link rel="stylesheet" href="" th:href="@{css/Home.css}" />
-	<style>
-		body{
-			background-image: url('./Images/istockphoto-1006271368-612x612.jpg'); 
-			 background-size: cover; 
-        
-    
-		}
-	</style>
-</head>
+    <!-- ==== STYLE.CSS ==== -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 
-<body>
-	<nav th:replace="~{Navigation::navbar()}"></nav>
-	<div class="text">
-	<h1 >WELCOME TO OUR WEBSITE </h1>
-	<h3 >Where Quality Meets Innovation! <br /> Explore our wide range of products designed to enhance your life.</h3>
-	</div>
-	
-</body>
+    <!-- ====  REMIXICON CDN ====
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="" th:href="@{/css/Navigation.css}" />
+    <link rel="icon" type="image/x-icon" href="./Images/yourbuddy.jpg">
+    <link rel="stylesheet" href="" th:href="@{css/Products.css}" />
+    <!-- ==== ANIMATE ON SCROLL CSS CDN  ====
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />-->
+  </head>
+  <body>
+    <!-- ==== HEADER ==== -->
 
+      <nav th:replace="~{Navigation::navbar()}"></nav>
+
+
+    <section class="wrapper">
+      <div class="container">
+        <div class="grid-cols-2">
+          <div class="grid-item-1">
+            <h1 class="main-heading">
+              Welcome to <span>YourBuddy Restaurant</span>
+            </h1>
+            <p class="info-text">
+              A friendly neighborhood restaurant offering paneer delights, wholesome meals, and refreshing beverages.
+            </p>
+
+            <div class="btn_wrapper">
+              <a th:href="@{/login}" class="btn view_more_btn">Login</a>
+              <a th:href="@{/register}" class="btn view_more_btn">Register</a>
+            </div>
+          </div>
+          <div class="grid-item-2">
+            <div class="team_img_wrapper">
+              <img th:src="@{/images/yourbuddy.jpg}" alt="team-img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== MENU SECTION ==== -->
+    <section class="wrapper" id="menu">
+      <div class="container">
+        <h1 class="section-title">Our Menu</h1>
+
+        <div class="menu-grid">
+          <!-- Loop through all products -->
+          <div class="menu-card" th:each="prod : ${products}">
+            <div class="menu-img-wrapper">
+              <img th:src="@{/images/products/{file}(file=${prod.image})}"
+                   th:alt="${prod.pname}" class="menu-img">
+            </div>
+            <div class="menu-content">
+              <div class="menu-title-price">
+                <h3 th:text="${prod.pname}"></h3>
+                <span class="price">₹<span th:text="${prod.pprice}"></span></span>
+              </div>
+              <p class="menu-desc" th:text="${prod.pdescription}"></p>
+
+              <div class="menu-action" th:if="${session.user != null}">
+                <form th:action="@{/cart/add}" method="post">
+                  <input type="hidden" name="productId" th:value="${prod.pid}" />
+                  <button type="submit" class="btn-cart">Add to Cart</button>
+                </form>
+              </div>
+
+              <div class="menu-action" th:if="${session.user == null}">
+                <a th:href="@{/login}" class="btn-cart">Login to Add</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==== TESTIMONIALS ==== -->
+    <section class="wrapper">
+      <div class="container" data-aos="fade-up" data-aos-duration="1000">
+        <h2 class="section-title">What Our Customers Say</h2>
+
+        <div class="testimonials">
+          <div class="testimonial-card">
+            <p class="testimonial-text">“The Paneer Butter Masala was rich and creamy, loved every bite!”</p>
+            <h4 class="testimonial-author">— Aditi Sharma</h4>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">“Quick delivery and fresh food, reminds me of Zomato service!”</p>
+            <h4 class="testimonial-author">— Rohan Mehta</h4>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">“Affordable prices with top-notch quality, highly recommended.”</p>
+            <h4 class="testimonial-author">— Neha Kapoor</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer></footer>
+
+    <!-- ==== ANIMATE ON SCROLL JS CDN ==== -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- ==== GSAP CDN ==== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <!-- ==== SCRIPT.JS ==== -->
+    <script th:src="@{/JavaScript/app.js}" defer></script>
+
+    <script>
+      function openMenu(evt, menuName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("menu-tab");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(menuName).style.display = "flex";
+        evt.currentTarget.className += " active";
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("myLink").click();
+      });
+    </script>
+  </body>
 </html>

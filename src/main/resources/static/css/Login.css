@@ -1,98 +1,207 @@
-body {
-	background-image: url(/Images/backgroundTea.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	overflow: hidden;
-}
 
-.LoginContainer {
-	display: flex;
-	margin: 0;
-	padding: 0;
-	height: 700px;
-}
+		* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-input {
-	display: block;
-	background: transparent;
-	border: none;
-	outline: none;
-	border-bottom: 1px solid black;
-	padding: 10px;
-	color: seagreen;
-	font-size: 16px;
-	cursor: pointer;
-	width: 200px;
-	position: relative;
-	left: 0px;
-	top: 0px;
+        body {
+            background-color: #101010;
+             color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
+        .LoginContainer {
+            display: flex;
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
 
-}
+        .admin, .user {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-input:hover {
-	transition: 1.1s;
-	width: 300px;
-}
+        .admin:hover, .user:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
 
-.user {
-	width: 50%;
-	background-color: antiquewhite;
-}
+        .admin {
+            border-top: 4px solid #28a745;
+        }
 
-.admin {
+        .user {
+            border-top: 4px solid #17a2b8;
+        }
 
-	background: linear-gradient(to right, white, rgb(197, 238, 197));
-	width: 50%;
-}
+        .content {
+            text-align: center;
+        }
 
-.user,
-.admin {
-	font-size: 20px;
-	font-family: sans-serif;
-	letter-spacing: 0.1px;
-	color: lightslategray;
-}
+        .admin-header, .user-header {
+            margin-bottom: 2rem;
+        }
 
-.content {
-	position: relative;
-	left: 250px;
-	top: 200px;
-}
+        .admin-header strong {
+            background-color: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
 
-strong {
-	border: 1px rgb(0, 0, 0) solid;
-	padding: 5px;
-	background-color:rgb(128, 64, 64);
-	color: antiquewhite;
-	font-family: sans-serif;
-	border-radius: 3px;
-	
-}
+        h2 {
+            color: #2c3e50;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
 
-.loginButton {
-	position: relative;
-	left: 60px;
-	border: 1px solid green;
-	cursor: pointer;
-	color: green;
-	font-weight: bold;
-	padding: 5px;
-	width: 80px;
-}
+        span {
+            font-weight: 700;
+        }
 
-.loginButton:hover {
-	width: 110px;
-	border-radius: 5px;
-	color: antiquewhite;
-	background-color: green;
-	transition: 1s;
-}
+        .admin span {
+            color: #28a745;
+        }
 
-.admin h2,
-.user h2
- {
-	/*position: relative;
-	left: 50px;*/
-	margin-top: 5px;
-}
+        .user span {
+            color: #17a2b8;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        input[type="email"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            background-color: #fff;
+        }
+
+        input[type="email"]:hover, input[type="password"]:hover {
+            border-color: #aaa;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .loginButton {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .user .loginButton {
+            background-color: #17a2b8;
+        }
+
+        .loginButton:hover {
+            background-color: #218838;
+        }
+
+        .user .loginButton:hover {
+            background-color: #138496;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .register-link a {
+            color: #17a2b8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        .input-icon input {
+            padding-left: 2.5rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .LoginContainer {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .admin, .user {
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .admin, .user {
+                padding: 1.5rem;
+            }
+        }

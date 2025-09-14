@@ -58,4 +58,9 @@ public class AdminServices
 		}
 		return false;
 	}
+	
+	public Admin getAdminByEmail(String email) {
+	    return adminRepository.findByAdminEmail(email);
+	}
+
 }
